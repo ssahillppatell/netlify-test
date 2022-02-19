@@ -16,9 +16,8 @@ router.get('/', (req, res) => {
 })
 
 router.post('/olark', (req, res) => {
-    const reqData = JSON.parse(req.body.data)
-
     try {
+        const reqData = JSON.parse(req.body.data)
         for(let item of reqData.items) {
             if(item.body.includes("pizza") && reqData.visitor.countryCode == 'US' && reqData.visitor.region == 'NY') {
                 return res.end(JSON.stringify({
@@ -28,7 +27,7 @@ router.post('/olark', (req, res) => {
             }
         }
     } catch(err) {
-        res.end(JSON.stringify({
+        return res.end(JSON.stringify({
             status: 'no pizza',
             integrationUrl: undefined
         }));
