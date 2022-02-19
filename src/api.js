@@ -18,15 +18,20 @@ router.get('/', (req, res) => {
 router.post('/olark', (req, res) => {
     const reqData = JSON.parse(req.body.data)
 
-    // console.log(reqData);
-
-    for(let item of reqData.items) {
-        if(item.body.includes("pizza") && reqData.visitor.countryCode == 'US' && reqData.visitor.region == 'NY') {
-            return res.end(JSON.stringify({
-                status: 'pizza',
-                integrationUrl: undefined
-            }))
+    try {
+        for(let item of reqData.items) {
+            if(item.body.includes("pizza") && reqData.visitor.countryCode == 'US' && reqData.visitor.region == 'NY') {
+                return res.end(JSON.stringify({
+                    status: 'pizza',
+                    integrationUrl: undefined
+                }))
+            }
         }
+    } catch(err) {
+        res.end(JSON.stringify({
+            status: 'no pizza',
+            integrationUrl: undefined
+        }));
     }
 
     res.end(JSON.stringify({
