@@ -9,6 +9,12 @@ const port = process.env.PORT || 3000
 app.use(express.json())
 app.use(express.urlencoded( {extended: true} ))
 
+router.get('/', (req, res) => {
+    res.json({
+        hello: 'world'
+    })
+})
+
 router.post('/olark', (req, res) => {
     const reqData = JSON.parse(req.body.data)
 
