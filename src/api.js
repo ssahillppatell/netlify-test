@@ -19,7 +19,7 @@ router.post('/olark', (req, res) => {
     try {
         const reqData = JSON.parse(req.body.data)
         for(let item of reqData.items) {
-            if(item.body.includes("pizza") && reqData.visitor.countryCode == 'US' && reqData.visitor.region == 'NY') {
+            if(item.body.toLowerCase().includes("pizza") && reqData.visitor.countryCode == 'US' && reqData.visitor.region == 'NY') {
                 return res.end(JSON.stringify({
                     status: 'pizza',
                     integrationUrl: undefined
